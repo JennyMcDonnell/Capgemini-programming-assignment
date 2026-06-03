@@ -143,7 +143,7 @@ public class Main {
                     System.out.println("Emotion not found. Please try again.");
                 }
                 break;
-            //view most common emotion
+            //view the most common emotion
             case "4":
                 if (moodLog.isEmpty()){
                     System.out.println("No moods recorded. Add a mood and try again.");
