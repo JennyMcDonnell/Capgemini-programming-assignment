@@ -19,17 +19,23 @@ public class Main {
             String userInput = scanner.nextLine();
 
             switch (userInput){
-                case "0": //exit
+                //exit
+                case "0":
                     System.exit(0);
-                case "1": //log a mood
+                //log a mood
+                case "1":
                     try{
                         moodLog.add(createMoodEntry());
                     }
-                    catch (Exception e) {
-                        System.out.println("Exception: " + e.getMessage() + "\n");
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Emotion not found. Please try again.");
+                    }
+                    catch (DateTimeParseException e){
+                        System.out.println("Date formating incorrect. Please try again");
                     }
                     break;
-                case "2": //view past moods
+                //view past moods
+                case "2":
                     viewPreviousMoods();
                     break;
                 default:
@@ -38,6 +44,8 @@ public class Main {
         }
     }
 
+    //handles the submenu for creating an emotion.
+    // args: None Return: MoodEntry Throws: IllegalArgumentException, DateTimeParseException
     public static MoodEntry createMoodEntry() throws IllegalArgumentException, DateTimeParseException {
         LocalDate dateToAdd;
         Emotions emotionToAdd;
@@ -65,7 +73,8 @@ public class Main {
     }
 
 
-
+    //handles the view previous moods submenu.
+    //args: None Return: None
     public static void viewPreviousMoods(){
         System.out.println("""
                 View moods by:
@@ -75,6 +84,7 @@ public class Main {
                 4. Most common emotion""");
         String userInput = scanner.nextLine();
         switch (userInput){
+            //view all
             case "1":
                 if (moodLog.isEmpty()){
                     System.out.println("No moods recorded. Add a mood and try again.");
@@ -89,6 +99,8 @@ public class Main {
                     System.out.println();
                 }
                 break;
+
+            //view by date
             case "2":
                 if (moodLog.isEmpty()){
                     System.out.println("No moods recorded. Add a mood and try again.");
@@ -107,6 +119,8 @@ public class Main {
                     }
                 }
                 break;
+
+            //view by emotion
             case "3":
                 if (moodLog.isEmpty()){
                     System.out.println("No moods recorded. Add a mood and try again.");
@@ -129,6 +143,7 @@ public class Main {
                     System.out.println("Emotion not found. Please try again.");
                 }
                 break;
+            //view most common emotion
             case "4":
                 if (moodLog.isEmpty()){
                     System.out.println("No moods recorded. Add a mood and try again.");
